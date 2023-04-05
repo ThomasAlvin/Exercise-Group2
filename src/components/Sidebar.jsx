@@ -1,12 +1,4 @@
-import {
-  Box,
-  Container,
-  Icon,
-  Text,
-  Button,
-  Card,
-  CardBody,
-} from '@chakra-ui/react';
+import { Box, Container, Icon, Text, Button } from '@chakra-ui/react';
 import { Image, Flex } from '@chakra-ui/react';
 import logo from '../img/Spotify_Logo_RGB_White.png';
 import {
@@ -20,7 +12,7 @@ import { BiGlobe } from 'react-icons/bi';
 
 export default function Sidebar() {
   return (
-    <Box w="246px" h="100vh" position={'absolute'} bg="black">
+    <Box zIndex={'2'} w="264px" maxH="100vh" position={'absolute'} bg="black">
       <Container>
         <Flex>
           <Image
@@ -127,19 +119,15 @@ export default function Sidebar() {
         </Container>
         <Container>
           <Flex>
-            <Card>
-              <CardBody>
-                <Icon
-                  className="icon2"
-                  as={BsHeartFill}
-                  margin={'20px 20px'}
-                  color={'#B3B3B3'}
-                  w={'20px'}
-                  h={'20px'}
-                  cursor={'pointer'}
-                ></Icon>
-              </CardBody>
-            </Card>
+            <Icon
+              className="icon"
+              as={BsHeartFill}
+              margin={'20px 20px'}
+              color={'#B3B3B3'}
+              w={'20px'}
+              h={'20px'}
+              cursor={'pointer'}
+            ></Icon>
             <Text
               className="text"
               color={'#B3B3B3'}
@@ -159,6 +147,7 @@ export default function Sidebar() {
               className="cookies"
               color={'#B3B3B3'}
               marginLeft={'10px'}
+              fontWeight={'10px'}
               fontSize={'smaller'}
               textAlign={'center'}
               cursor={'pointer'}

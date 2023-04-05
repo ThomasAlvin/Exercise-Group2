@@ -1,3 +1,5 @@
+import { calc } from '@chakra-ui/react';
+
 export default function Test() {
   const arr = [
     {
@@ -102,7 +104,7 @@ export default function Test() {
 
   return (
     <div className="lol">
-      <div className="emptybox"></div>
+      {/* <div className="emptybox"></div> */}
       <div className="gridbox">
         <div
           style={{

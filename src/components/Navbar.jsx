@@ -1,12 +1,21 @@
 import '../css/navbar.css';
-import { Button, ButtonGroup, Icon } from '@chakra-ui/react';
-import { CgProfile, CgSmileNone } from 'react-icons/cg';
-import { Select } from '@chakra-ui/react';
+import { Button, Icon } from '@chakra-ui/react';
+import { CgProfile } from 'react-icons/cg';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import Test from '../asset/Exercise';
-import { useSelector } from 'react-redux';
+
+import Test from './Exercise';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { auth_types } from '../redux/types';
 export default function Navbar() {
   const userSelector = useSelector(state => state.auth);
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+  function logout() {
+    dispatch({ type: auth_types.logout });
+    localStorage.removeItem('user');
+    nav('/login');
+  }
   return (
     <div>
       <div className="navbarnya">
@@ -53,11 +62,14 @@ export default function Navbar() {
               </Button>
               <div className="account">
                 <Icon
+                  onClick={logout}
                   className="profilelogo"
                   as={CgProfile}
                   style={{ width: '25px', height: '25px' }}
+                  cursor={'pointer'}
                 />
-                <Select
+                {userSelector?.email}
+                {/* <Select
                   borderColor={'blackAlpha.50'}
                   className="buttonaccount"
                   size={'sm'}
@@ -66,7 +78,7 @@ export default function Navbar() {
                   <option value="option1">{userSelector.email}</option>
                   <option value="option2">Option 2</option>
                   <option value="option3">Option 3</option>
-                </Select>
+                </Select> */}
               </div>
             </div>
           </div>

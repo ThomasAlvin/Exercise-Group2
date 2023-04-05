@@ -1,14 +1,14 @@
-import { ColorModeScript } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import { ChakraProvider } from '@chakra-ui/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './redux/store';
+import AuthProvider from './hoc/authprovider';
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 const store = configureStore({ reducer: rootReducer });
@@ -16,10 +16,10 @@ root.render(
   <Provider store={store}>
     <ChakraProvider>
       <BrowserRouter>
-        <StrictMode>
-          <ColorModeScript />
+        <ColorModeScript />
+        <AuthProvider>
           <App />
-        </StrictMode>
+        </AuthProvider>
       </BrowserRouter>
     </ChakraProvider>
   </Provider>
