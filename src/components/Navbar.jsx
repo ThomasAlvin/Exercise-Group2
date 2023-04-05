@@ -4,7 +4,9 @@ import { CgProfile, CgSmileNone } from 'react-icons/cg';
 import { Select } from '@chakra-ui/react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import Test from '../asset/Exercise';
+import { useSelector } from 'react-redux';
 export default function Navbar() {
+  const userSelector = useSelector(state => state.auth);
   return (
     <div>
       <div className="navbarnya">
@@ -59,9 +61,9 @@ export default function Navbar() {
                   borderColor={'blackAlpha.50'}
                   className="buttonaccount"
                   size={'sm'}
-                  placeholder="Name"
+                  placeholder={userSelector.password}
                 >
-                  <option value="option1">Option 1</option>
+                  <option value="option1">{userSelector.email}</option>
                   <option value="option2">Option 2</option>
                   <option value="option3">Option 3</option>
                 </Select>
