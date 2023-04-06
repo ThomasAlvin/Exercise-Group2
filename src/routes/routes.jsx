@@ -6,6 +6,7 @@ import HomePage from '../pages/HomePage';
 import Forgotpassword from '../pages/forgotpassword';
 import LoginPage from '../pages/login';
 import ProtectedPage from './protectedpage';
+import RegisterPage from '../pages/registerpage';
 
 const routes = [
   <Route
@@ -53,6 +54,14 @@ const routes = [
     element={
       <ProtectedPage guestOnly={true} needLogin={false}>
         <LoginPage />
+      </ProtectedPage>
+    }
+  />,
+  <Route
+    path="/registerpage"
+    element={
+      <ProtectedPage guestOnly={true} needLogin={false}>
+        <RegisterPage />
       </ProtectedPage>
     }
   />,
