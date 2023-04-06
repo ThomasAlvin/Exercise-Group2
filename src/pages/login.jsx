@@ -10,6 +10,7 @@ import {
   ButtonGroup,
   InputRightElement,
   InputGroup,
+  Alert,
 } from '@chakra-ui/react';
 import logo from '../asset/spotify-logo2.png';
 import { BsApple, BsFacebook, BsGift, BsGoogle } from 'react-icons/bs';
@@ -21,9 +22,11 @@ import { useNavigate } from 'react-router-dom';
 import { useState, React, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { auth_types } from '../redux/types';
+import { useSelector } from 'react-redux';
 // import { tb } from 'react-icons/tb';
 
 export default function LoginPage() {
+  const userselector = useSelector(state => state.auth);
   const nav = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,9 +34,12 @@ export default function LoginPage() {
     email: '',
     password: '',
   });
-  useEffect(() => {
-    console.log('ada ketikan baru');
-  }, [account.password]);
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   if (user?.email && user?.password) {
+  //     return nav('/');
+  //   }
+  // }, []);
   function inputHandler(event) {
     const { value, id } = event.target;
     const tempAccount = { ...account };
@@ -41,10 +47,14 @@ export default function LoginPage() {
     setAccount(tempAccount);
   }
   function login() {
-    dispatch({ type: auth_types.login, payload: account });
-    nav('/');
+    if (account.email && account.password) {
+      dispatch({ type: auth_types.login, payload: account });
+      localStorage.setItem('user', JSON.stringify(account));
+
+      return nav('/');
+    }
+    alert('harus masukin email dan password');
   }
-  localStorage.setItem('user', JSON.stringify(account));
 
   const [seePassword, setSeePassword] = useState(false);
   return (

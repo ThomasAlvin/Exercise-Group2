@@ -2,17 +2,17 @@ import { Input } from '@chakra-ui/react';
 import { auth_types } from './types';
 
 const init = {
-  email: 'thomsaa',
-  password: 'lol',
+  email: '',
+  password: '',
 };
-function userReducer(state = init, action) {
-  if (action.type == auth_types.login) {
+function userReducer(state = init, a) {
+  if (a.type == auth_types.login) {
     return {
       state,
-      mail: action.payload.gmail,
-      passwords: action.payload.passwords,
+      email: a.payload.email,
+      password: a.payload.password,
     };
-  } else if (action.type == auth_types.login) {
+  } else if (a.type == auth_types.logout) {
     return { ...init };
   }
   return state;
