@@ -18,11 +18,12 @@ import { FcGoogle } from 'react-icons/fc';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import ReactDOM from 'react-dom';
 import Favicon from 'react-favicon';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, React, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { auth_types } from '../redux/types';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 // import { tb } from 'react-icons/tb';
 
 export default function LoginPage() {
@@ -46,14 +47,20 @@ export default function LoginPage() {
     tempAccount[id] = value;
     setAccount(tempAccount);
   }
-  function login() {
-    if (account.email && account.password) {
-      dispatch({ type: auth_types.login, payload: account });
-      localStorage.setItem('user', JSON.stringify(account));
+  async function login() {
+    await axios
+      .get('http://localhost:2000/user', {
+        params: { email: account.email, password: account.password },
+      })
+      .then(res => console.log(res));
 
-      return nav('/');
-    }
-    alert('harus masukin email dan password');
+    // if (account.email && account.password) {
+    //   dispatch({ type: auth_types.login, payload: account });
+    //   localStorage.setItem('user', JSON.stringify(account));
+
+    //   return nav('/');
+    // }
+    // alert('harus masukin email dan password');
   }
 
   const [seePassword, setSeePassword] = useState(false);
@@ -102,7 +109,14 @@ export default function LoginPage() {
               cursor={'pointer'}
             >
               <Icon w={'20px'} h={'20px'} as={BsFacebook}></Icon>
-              <Center>CONTINUE WITH FACEBOOK</Center>
+              <Center
+                fontFamily={
+                  'CircularSp, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva, sans-serif'
+                }
+                fontSize={'14px'}
+              >
+                CONTINUE WITH FACEBOOK
+              </Center>
             </Center>
           </a>
           <Center
@@ -210,9 +224,6 @@ export default function LoginPage() {
                   ></Icon>
                 </InputRightElement>
               </InputGroup>
-              {account.password.length < 8 ? (
-                <Box color={'red'}>password min 8</Box>
-              ) : null}
             </Flex>
 
             <Flex flexDir={'column'} gap={'5px'}>
@@ -262,18 +273,22 @@ export default function LoginPage() {
               {' '}
               Don't have an account?
             </Flex>
-            <Flex>
-              <Button
-                w={'100%'}
-                borderRadius={'20px'}
-                colorScheme="whiteAlpha"
-                color={'grey'}
-                variant={'outline'}
-                fontWeight={'550'}
-              >
-                {' '}
-                SIGN UP FOR SPOTIFY
-              </Button>
+            <Flex pb={'200px'} justifyContent={'center'}>
+              <Box w={'100%'}>
+                <Link to={'/registerpage'} width={'100%'}>
+                  <Button
+                    w={'100%'}
+                    borderRadius={'20px'}
+                    colorScheme="whiteAlpha"
+                    color={'grey'}
+                    variant={'outline'}
+                    fontWeight={'550'}
+                    cursor={'default'}
+                  >
+                    <Flex textDecor={'underline'}>SIGN UP FOR SPOTIFY</Flex>
+                  </Button>
+                </Link>
+              </Box>
             </Flex>
           </Flex>
         </Center>

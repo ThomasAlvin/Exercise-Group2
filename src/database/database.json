@@ -1,0 +1,28 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "name": "test",
+      "email": "test@mail.com",
+      "password": "12345678",
+      "Birthdate": "",
+      "gender": "Male"
+    },
+    {
+      "id": 2,
+      "name": "test2",
+      "email": "test2@mail.com",
+      "password": "12345678",
+      "Birthdate": "",
+      "gender": "feMale"
+    },
+    {
+      "name": "udin",
+      "id": 3,
+      "email": "test23@mail.com",
+      "password": "12345678",
+      "Birthdate": "",
+      "gender": "feMale"
+    }
+  ]
+}
